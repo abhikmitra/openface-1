@@ -166,6 +166,7 @@ class OpenFaceServerProtocol(WebSocketServerProtocol):
         X = []
         y = []
         for img in self.images.values():
+            print("img",img)
             X.append(img.rep)
             y.append(img.identity)
 
