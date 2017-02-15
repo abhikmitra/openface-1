@@ -243,7 +243,6 @@ class OpenFaceServerProtocol(WebSocketServerProtocol):
             self.svm = GridSearchCV(SVC(C=1), param_grid, cv=5).fit(X, y)
 
     def sendToPi(self, msg):
-        return
         UDP_IP = "192.168.0.2"
         UDP_PORT = 5005
         MESSAGE = msg
@@ -312,7 +311,6 @@ class OpenFaceServerProtocol(WebSocketServerProtocol):
                         "representation": rep.tolist()
                     }
                     self.sendMessage(json.dumps(msg))
-                    self.sendToPi(json.dumps(msg))
                 else:
                     if len(self.people) == 0:
                         identity = -1
@@ -369,7 +367,6 @@ class OpenFaceServerProtocol(WebSocketServerProtocol):
             }
             plt.close()
             self.sendMessage(json.dumps(msg))
-            self.sendToPi(json.dumps(msg))
 
 
 if __name__ == '__main__':
