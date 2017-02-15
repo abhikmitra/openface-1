@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # OpenFace • [ ![Build Status] [travis-image] ] [travis] [ ![Release] [release-image] ] [releases] [ ![License] [license-image] ] [license] [ ![Gitter] [gitter-image] ] [gitter]
 
 *Free and open source face recognition with
@@ -87,3 +88,6 @@ Project | Modified | License
 ---|---|---|
 [Atcold/torch-TripletEmbedding](https://github.com/Atcold/torch-TripletEmbedding) | No | MIT
 [facebook/fbnn](https://github.com/facebook/fbnn) | Yes | BSD
+=======
+# face-recognition-openface
+>>>>>>> 42b2118d74bf4c6df43d9bcd54ffea9920cf8b50
