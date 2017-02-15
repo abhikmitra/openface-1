@@ -248,10 +248,6 @@ class OpenFaceServerProtocol(WebSocketServerProtocol):
         UDP_PORT = 5005
         MESSAGE = msg
 
-        print "UDP target IP:", UDP_IP
-        print "UDP target port:", UDP_PORT
-        print "message:", MESSAGE
-
         sock = socket.socket(socket.AF_INET,  # Internet
                              socket.SOCK_DGRAM)  # UDP
 
