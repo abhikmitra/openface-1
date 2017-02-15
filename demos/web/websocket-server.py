@@ -98,17 +98,18 @@ class OpenFaceServerProtocol(WebSocketServerProtocol):
             self.unknownImgs = np.load("./examples/web/unknown.npy")
 
     def onConnect(self, request):
-        print("Client connecting: {0}".format(request.peer))
+        #print("Client connecting: {0}".format(request.peer))
         self.training = True
 
     def onOpen(self):
-        print("WebSocket connection open.")
+        #print("WebSocket connection open.")
+        return
 
     def onMessage(self, payload, isBinary):
         raw = payload.decode('utf8')
         msg = json.loads(raw)
-        print("Received {} message of length {}.".format(
-            msg['type'], len(raw)))
+        #print("Received {} message of length {}.".format(
+        #   msg['type'], len(raw)))
         if msg['type'] == "ALL_STATE":
             self.loadState(msg['images'], msg['training'], msg['people'])
         elif msg['type'] == "NULL":
