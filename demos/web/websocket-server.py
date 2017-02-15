@@ -26,7 +26,7 @@ from autobahn.twisted.websocket import WebSocketServerProtocol, \
     WebSocketServerFactory
 from twisted.python import log
 from twisted.internet import reactor
-
+import socket
 import argparse
 import cv2
 import imagehash
@@ -242,6 +242,20 @@ class OpenFaceServerProtocol(WebSocketServerProtocol):
             ]
             self.svm = GridSearchCV(SVC(C=1), param_grid, cv=5).fit(X, y)
 
+    def sendToPi(self, msg):
+        UDP_IP = "192.168.0.2"
+        UDP_PORT = 5005
+        MESSAGE = msg
+
+        print "UDP target IP:", UDP_IP
+        print "UDP target port:", UDP_PORT
+        print "message:", MESSAGE
+
+        sock = socket.socket(socket.AF_INET,  # Internet
+                             socket.SOCK_DGRAM)  # UDP
+
+        sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+
     def processFrame(self, dataURL, identity):
         head = "data:image/jpeg;base64,"
         assert(dataURL.startswith(head))
@@ -297,6 +311,7 @@ class OpenFaceServerProtocol(WebSocketServerProtocol):
                         "representation": rep.tolist()
                     }
                     self.sendMessage(json.dumps(msg))
+                    self.sendToPi(json.dumps(msg))
                 else:
                     if len(self.people) == 0:
                         identity = -1
@@ -335,6 +350,7 @@ class OpenFaceServerProtocol(WebSocketServerProtocol):
                 "identities": identities
             }
             self.sendMessage(json.dumps(msg))
+            self.sendToPi(json.dumps(msg))
 
             plt.figure()
             plt.imshow(annotatedFrame)
@@ -352,6 +368,8 @@ class OpenFaceServerProtocol(WebSocketServerProtocol):
             }
             plt.close()
             self.sendMessage(json.dumps(msg))
+            self.sendToPi(json.dumps(msg))
+
 
 if __name__ == '__main__':
     log.startLogging(sys.stdout)
