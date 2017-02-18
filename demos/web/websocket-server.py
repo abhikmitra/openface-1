@@ -245,7 +245,8 @@ class OpenFaceServerProtocol(WebSocketServerProtocol):
             self.svm = GridSearchCV(SVC(C=1), param_grid, cv=5).fit(X, y)
 
     def sendToPi(self, msg):
-        UDP_IP = "192.175.5.182"
+        # UDP_IP = "192.175.5.182"
+        UDP_IP = "192.175.6.7"
         UDP_PORT = 5005
         MESSAGE = msg
 
